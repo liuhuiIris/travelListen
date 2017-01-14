@@ -1,0 +1,17 @@
+<view class="container">
+    <view class="curCity">
+        <text>当前城市: {{curCity}}</text>
+    </view>
+    <view class="hotCitys">
+        <text class="hotTitle">热门城市</text>
+        <view class="hotList">
+            <text wx:bindtap="chooseCity" class="hotItem" wx:for="{{hotCitys}}" wx:key="{{item.vtg_city_id}}">{{item.vtg_city_name}}</text>
+        </view>
+    </view>
+    <view class="allCitys">
+        <view wx:for="{{allCitys}}" wx:key="{{item.vtg_city_id}}">
+            <view class="allLetter">{{item.lyPrefixLetter}}</view>
+            <view wx:bindtap="chooseCity" class="allText">{{item.vtg_city_name}}</view>
+        </view>
+    </view>
+</view>

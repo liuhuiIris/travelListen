@@ -1,12 +1,18 @@
 //index.js
 //获取应用实例
 var app = getApp();
-
 //获取封装好的ajax
 var ajax = require('../../utils/util.ajax.js');
 
+var _url = app.globalData.url;
+
+var amapFile = require('../../utils/amap-wx.js');
+// 实例化地图API，获取当前定位信息
+var myAmapFun = new amapFile.AMapWX({key:'fa5b1bf50930615d2303c0072aa33691'});
+
 Page({
     data:{
+        cityName:'',       
         hotList:null,
         navList:[
             {
@@ -33,13 +39,35 @@ Page({
     },
     onLoad:function(){
         var that = this;
-        ajax.post('https://www.yuanweilh.com.cn/vtg/v3/api.do',
-                'cityName=%E5%8C%97%E4%BA%AC&lanKey=zh-cn&provinceName=&method=scenicsOfCityNew&',
+        // 调用高德地图接口，获取城市信息
+        myAmapFun.getRegeo({
+            success: function(data){
+                //获取当前城市信息
+                console.log(data[0].regeocodeData.addressComponent);
+                var _msg = data[0].regeocodeData.addressComponent;
+                var _city = _msg.city[0]?_msg.city[0]:_msg.province;
+                app.globalData.curCity = _city;
+                that.setData({
+                    cityName:_city
+                });
+
+                console.log(app.globalData.curCity);
+
+                // 获取当前城市热门景点列表
+                ajax.post(_url,
+                'cityName='+that.data.cityName+'&lanKey=zh-cn&provinceName=&method=scenicsOfCityNew&',
                 function(res){
                     that.setData({
                         hotList:res.data.data.scenics
                     });
                 })
+            },
+            fail: function(info){
+                //失败回调
+                console.log(info)
+            }
+        });
+ 
     },
     myLocation:function(){
         var that = this;

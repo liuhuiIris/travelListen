@@ -25,7 +25,9 @@ App({
     }
   },
   globalData:{
-    userInfo:null
+    userInfo:null,
+    curCity:'',
+    url:'https://www.yuanweilh.com.cn/vtg/v3/api.do'
   }
  
 })
