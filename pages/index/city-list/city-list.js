@@ -9,16 +9,26 @@ Page({
         hotCitys:null,
         allCitys:null
     },
-    onLoad:function(){
+    onLoad:function(query){
         var that = this;
         this.setData({
-            curCity:app.globalData.curCity
+            curCity:query.city
         });
         ajax.post(_url,_data,function (res) {  
             that.setData({
                 hotCitys:res.data.data.hotCitys,
                 allCitys:res.data.data.allCitys
             });
+        })
+    },
+    chooseCity:function (event) {  
+        // console.log(event.target.id);
+        wx.switchTab({
+            url:"/pages/index/index",
+            success:function () {  
+                app.globalData.curCity = event.target.id;
+                // console.log(app.globalData.curCity);
+            }
         })
     }
 })

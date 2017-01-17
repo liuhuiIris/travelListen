@@ -35,10 +35,14 @@
       border-radius: 20rpx; }
 
 .allCitys .allLetter {
+  box-sizing: border-box;
   background: #eee;
   height: 80rpx;
-  line-height: 80rpx; }
+  line-height: 80rpx;
+  padding-left: 10rpx; }
 
 .allCitys .allText {
+  box-sizing: border-box;
   height: 100rpx;
-  line-height: 100rpx; }
+  line-height: 100rpx;
+  padding-left: 10rpx; }

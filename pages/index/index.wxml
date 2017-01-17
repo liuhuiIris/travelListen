@@ -2,7 +2,7 @@
 <view class="container">
   <!-- index title start-->
   <view class="page_title">
-    <navigator url="city-list/city-list" redirect>
+    <navigator url="city-list/city-list?city={{cityName}}" redirect>
         <view class="loc_btn">{{cityName}}<image class="loc_more_img" src="../../images/icon_arrow_down_white.png"/></view>
     </navigator>
     

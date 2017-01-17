@@ -11,7 +11,7 @@
     <view class="allCitys">
         <view wx:for="{{allCitys}}" wx:key="{{item.vtg_city_id}}">
             <view class="allLetter">{{item.lyPrefixLetter}}</view>
-            <view wx:bindtap="chooseCity" class="allText">{{item.vtg_city_name}}</view>
+            <view id="{{item.vtg_city_name}}" bindtap="chooseCity" class="allText">{{item.vtg_city_name}}</view>
         </view>
     </view>
 </view>

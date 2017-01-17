@@ -37,37 +37,37 @@ Page({
             }
         ]
     },
-    onLoad:function(){
+    onReady:function(){
         var that = this;
         // 调用高德地图接口，获取城市信息
-        myAmapFun.getRegeo({
-            success: function(data){
-                //获取当前城市信息
-                console.log(data[0].regeocodeData.addressComponent);
-                var _msg = data[0].regeocodeData.addressComponent;
-                var _city = _msg.city[0]?_msg.city[0]:_msg.province;
-                app.globalData.curCity = _city;
-                that.setData({
-                    cityName:_city
-                });
-
-                console.log(app.globalData.curCity);
-
-                // 获取当前城市热门景点列表
-                ajax.post(_url,
-                'cityName='+that.data.cityName+'&lanKey=zh-cn&provinceName=&method=scenicsOfCityNew&',
-                function(res){
+        if(app.globalData.curCity){
+             this.setData({cityName:app.globalData.curCity});
+             this.getHot();
+        }else{
+            myAmapFun.getRegeo({
+                success: function(data){
+                    //获取当前城市信息
+                    
+                    console.log(data[0].regeocodeData.addressComponent);
+                    var _msg = data[0].regeocodeData.addressComponent;
+                    var _city = _msg.city[0]?_msg.city[0]:_msg.province;
+                    app.globalData.curCity = _city;
                     that.setData({
-                        hotList:res.data.data.scenics
+                        cityName:_city
                     });
-                })
-            },
-            fail: function(info){
-                //失败回调
-                console.log(info)
-            }
-        });
- 
+
+                    // console.log(app.globalData.curCity);
+
+                    // 获取当前城市热门景点列表
+                    that.getHot();
+                },
+                fail: function(info){
+                    //失败回调
+                    console.log(info)
+                }
+            });
+        }
+        
     },
     myLocation:function(){
         var that = this;
@@ -84,5 +84,15 @@ Page({
                 })
             }
         });
+    },
+    getHot:function () {
+        var that = this;  
+        ajax.post(_url,
+                'cityName='+that.data.cityName+'&lanKey=zh-cn&provinceName=&method=scenicsOfCityNew&',
+                function(res){
+                    that.setData({
+                        hotList:res.data.data.scenics
+                    });
+                })
     }
 })
