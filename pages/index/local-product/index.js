@@ -1,6 +1,6 @@
 var ajax = require('../../../utils/util.ajax.js');
 var _url = 'https://www.yuanweilh.com.cn/vtg/v3/api.do';
-var _data = 'latitude=40.124069&cityName=%E5%8C%97%E4%BA%AC&method=specialtyRecommended&sortIndicator=0&page=1&longitude=116.25803&';
+var app = getApp();
 Page({
     data:{
         localProduct:null,
@@ -24,7 +24,7 @@ Page({
     onShow:function () { 
         // 在页面展示之后先获取一次数据
         var that = this;
-        ajax.post(_url,_data,function (res) {  
+        ajax.post(_url,'cityName='+app.globalData.curCity+'&method=specialtyRecommended&page=1',function (res) {  
            that.setData({
               localProduct:res.data.data,
               hasMore:false
@@ -41,7 +41,7 @@ Page({
             hasMore:true
         });
 
-       ajax.post(_url,_data,function (res) {   
+       ajax.post(_url,'cityName='+app.globalData.curCity+'&method=specialtyRecommended&page=1',function (res) {   
            that.setData({
               localProduct:res.data.data,
               hasMore:false
@@ -57,7 +57,7 @@ Page({
             loadMore:true
         });
 
-        ajax.post(_url,_data,function (res) {  
+        ajax.post(_url,'cityName='+app.globalData.curCity+'&method=specialtyRecommended&page=1',function (res) {  
             that.setData({
                 localProduct:res.data.data,
                 loadMore:false

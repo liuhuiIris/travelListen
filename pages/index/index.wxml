@@ -18,11 +18,11 @@
     </view>
     <!-- hot list start -->
     <scroll-view class="scroll-view_H" scroll-x="true" style="width:100%">
-      <view wx:for="{{hotList}}" wx:key="{{index}}" class="scroll-item">
+      <navigator wx:for="{{hotList}}" url="audio/audio?language={{item.vtg_language_id}}" redirect wx:key="{{index}}" class="scroll-item">
         <image src="../../images/icon_play.png" class="icon_play" />
         <image src="{{item.vtg_scenic_icon}}" class="hot-img"/>
         <text>{{item.vtg_scenic_name}}</text>
-      </view>
+      </navigator>
     </scroll-view>
     <!-- hot list end-->
   </div>

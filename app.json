@@ -1,12 +1,13 @@
 {
   "pages":[
+    "pages/index/audio/audio",
     "pages/index/index",
     "pages/index/city-list/city-list",
     "pages/index/local-product/index",
     "pages/index/local-snack/local-snack",
     
     "pages/index/location/location",
-    "pages/index/audio/audio",
+    
 
     "pages/friends/friends",
     "pages/friends/about_with/about_with",

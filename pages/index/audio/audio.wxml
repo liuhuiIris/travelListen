@@ -1,0 +1,4 @@
+<view class="container">
+    <image src="{{icon}}" />
+    <audio src="{{audioSrc}}" id="myAudio" controls></audio>
+</view>
